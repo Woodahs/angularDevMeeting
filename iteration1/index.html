@@ -1,0 +1,67 @@
+<!doctype html>
+<html ng-app="CartApp">
+
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS - iteration one</title>
+    <link href="../lib/css/bootstrap-3.3.4.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" ng-role="main" ng-controller="taskOneController">
+        <!-- two ways of showing simple data in Angular: {{}}, ng-bind -->
+        <p>{{greetings}} <span ng-bind="name"></span></p>
+        <h1>Products:</h1>
+
+        <!-- product filters and sorting -->
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-xs-12">
+                <span>Sort by: </span>
+                <button class="btn btn-default" ng-class="{'active' : sorting.by === 'name'}" ng-click="sortBy('name')">
+                    <span ng-show="sorting.by === 'name'">
+                        <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
+                        <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    Name
+                </button>
+                <button class="btn btn-default" ng-class="{'active' : sorting.by === 'price'}" ng-click="sortBy('price')">
+                    <span ng-show="sorting.by === 'price'">
+                        <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
+                        <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    Price
+                </button>
+            </div>
+        </div>
+
+        <!-- products list -->
+        <div class="row">
+            <div class="m-productList_item col-md-4" ng-repeat="product in productsList | orderBy:sorting.by:sorting.desc">
+                <img src="{{product.image}}" />
+                <h2>{{product.name}}</h2>
+                <p>{{product.desc}}</p>
+                <p>{{product.price | currency}}</p>
+            </div>
+        </div>
+        <!--  
+       <div class="basket">
+           <p>Basket:</p>
+           <ul>
+               <li ng-repeat="product in products | filter:{inBasket:true}">{{product.name}}</li>
+           </ul>
+       </div>
+       <div class="row">
+           <span>Filters: </span>
+           <a class="btn" ng-class="showSpecialOffers ? 'btn-default' : 'btn-primary'" ng-click="showSpecialOffers = !showSpecialOffers">{{showSpecialOffers === true ? 'hide special offers' : 'show special offers'}}</a>
+       </div>
+       <div class="row input-group">
+           <span class="glyphicon glyphicon-search"></span>
+           <input ng-model="filtering.price" />
+       </div> -->
+    </div>
+    <script src="../lib/js/angular-1.3.9.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
