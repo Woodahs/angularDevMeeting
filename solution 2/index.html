@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app="CartApp">
+
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS - iteration two</title>
+    <link href="../lib/css/bootstrap-3.3.4.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" ng-role="main" ng-controller="mainController">
+        <!-- product filters and sorting -->
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-xs-12">
+                <span>Sort by: </span>
+                <button class="btn btn-default" ng-class="{'btn-primary' : sorting.by === 'name'}" ng-click="sortBy('name')">
+                    <span ng-show="sorting.by === 'name'">
+                        <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
+                        <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    Name
+                </button>
+                <button class="btn btn-default" ng-class="{'btn-primary' : sorting.by === 'price'}" ng-click="sortBy('price')">
+                    <span ng-show="sorting.by === 'price'">
+                        <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
+                        <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    Price
+                </button>
+                <button class="btn btn-default" ng-click="showSpecialOffers = !showSpecialOffers;" ng-class="{'btn-primary' : showSpecialOffers}"><span ng-show="showSpecialOffers">Hide special offers</span><span ng-show="!showSpecialOffers">Show special offers</span></button>
+            </div>
+        </div>
+        <!-- search box -->
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-xs-12">
+                <span class="glyphicon glyphicon-search"></span>
+                <input ng-model="filtering" />
+            </div>
+        </div>
+        <!-- products list: special offers -->
+        <div class="row" style="margin-top: 15px;">
+            <h2>Special offers:</h2>
+            <div class="m-product js-product col-md-4" ng-repeat="product in productsList | filter: filtering | orderBy:sorting.by:sorting.desc" ng-show="product.isSpecial && showSpecialOffers" >
+                <img src="{{product.image}}" />
+                <h2>{{product.name}}</h2>
+                <p ng-show="!product.fullDesc">{{product.desc | limitTo:descriptionLimit}}</p>
+                <p ng-show="product.fullDesc">{{product.desc}}</p>
+                <p>{{product.price | currency}}</p>
+                <a class="btn btn-primary" class="js-product_toggleDesc" ng-click="toggleDesc()" ng-model="product.descLength"><span ng-show="!product.fullDesc">Show more...</span><span ng-show="product.fullDesc">Show less...</span></a>
+            </div>
+        </div>
+        <!-- products list: another offers -->
+        <div class="row" style="margin-top: 15px;">
+            <h2>Another offers:</h2>
+            <div class="m-product js-product col-md-4" ng-repeat="product in productsList | filter: filtering | orderBy:sorting.by:sorting.desc" ng-show="!product.isSpecial" >
+                <img src="{{product.image}}" />
+                <h2>{{product.name}}</h2>
+                <p ng-show="!product.fullDesc">{{product.desc | limitTo:descriptionLimit}}</p>
+                <p ng-show="product.fullDesc">{{product.desc}}</p>
+                <p>{{product.price | currency}}</p>
+                <a class="btn btn-primary" class="js-product_toggleDesc" ng-click="toggleDesc()" ng-model="product.descLength"><span ng-show="!product.fullDesc">Show more...</span><span ng-show="product.fullDesc">Show less...</span></a>
+            </div>
+        </div>
+    </div>
+    <script src="../lib/js/angular-1.3.9.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
