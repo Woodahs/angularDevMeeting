@@ -14,14 +14,14 @@
         <div class="row" style="margin-bottom: 15px;">
             <div class="col-xs-12">
                 <span>Sort by: </span>
-                <button class="btn btn-default" ng-class="{'active' : sorting.by === 'name'}" ng-click="sortBy('name')">
+                <button class="btn btn-default" ng-click="sortBy('name')">
                     <span ng-show="sorting.by === 'name'">
                         <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
                         <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
                     </span>
                     Name
                 </button>
-                <button class="btn btn-default" ng-class="{'active' : sorting.by === 'price'}" ng-click="sortBy('price')">
+                <button class="btn btn-default" ng-click="sortBy('price')">
                     <span ng-show="sorting.by === 'price'">
                         <span ng-show="sorting.desc" class="glyphicon glyphicon-chevron-up"></span>
                         <span ng-show="!sorting.desc" class="glyphicon glyphicon-chevron-down"></span>
@@ -38,7 +38,7 @@
                 <p ng-show="!product.fullDesc">{{product.desc | limitTo:descriptionLimit}}</p>
                 <p ng-show="product.fullDesc">{{product.desc}}</p>
                 <p>{{product.price | currency}}</p>
-                <a class="btn btn-primary" href="#" class="js-product_toggleDesc" ng-click="toggleDesc()" ng-model="product.descLength"><span ng-show="!product.fullDesc">Show more...</span><span ng-show="product.fullDesc">Show less...</span></a>
+                <a class="btn btn-primary" class="js-product_toggleDesc" ng-click="toggleDesc()" ng-model="product.descLength"><span ng-show="!product.fullDesc">Show more...</span><span ng-show="product.fullDesc">Show less...</span></a>
             </div>
         </div>
    </div>
